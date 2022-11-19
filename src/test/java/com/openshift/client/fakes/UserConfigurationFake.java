@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Files;
 import java.util.Properties;
 
 import com.openshift.client.OpenShiftException;
@@ -60,7 +61,7 @@ public class UserConfigurationFake extends UserConfiguration {
 	
 	protected File createFile() {
 		try {
-			return File.createTempFile(createRandomString(), null);
+			return Files.createTempFile(createRandomString(), null).toFile();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

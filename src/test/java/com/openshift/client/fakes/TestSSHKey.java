@@ -12,6 +12,7 @@ package com.openshift.client.fakes;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import com.openshift.client.OpenShiftException;
 import com.openshift.client.SSHKeyPair;
@@ -51,10 +52,10 @@ public class TestSSHKey {
 					"== created by com.openshift.client";
 
 	public static SSHKeyPair create() throws IOException, OpenShiftException {
-		File privateKeyFile = File.createTempFile(createRandomString(), null);
+		File privateKeyFile = Files.createTempFile(createRandomString(), null).toFile();
 		FileUtils.writeTo(privateKey, privateKeyFile);
 
-		File publicKeyFile = File.createTempFile(createRandomString(), null);
+		File publicKeyFile = Files.createTempFile(createRandomString(), null).toFile();
 		FileUtils.writeTo(publicKey, publicKeyFile);
 		
 		return SSHKeyPair.load(privateKeyFile.getAbsolutePath(), publicKeyFile.getAbsolutePath());

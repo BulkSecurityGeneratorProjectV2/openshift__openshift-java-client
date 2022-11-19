@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.file.Files;
 
 /**
  * @author Andre Dietisheim
@@ -51,13 +52,13 @@ public class FileUtils {
 	}
 	
 	public static File createRandomTempFile(String suffix) throws IOException {
-		File file = File.createTempFile(createRandomFilename(), suffix);
+		File file = Files.createTempFile(createRandomFilename(), suffix).toFile();
 		file.deleteOnExit();
 		return file;
 	}
 	
 	public static File createRandomTempDirectory() throws IOException {
-		File file = File.createTempFile(null, createRandomFilename());
+		File file = Files.createTempFile(null, createRandomFilename()).toFile();
 		file.mkdir();
 		file.deleteOnExit();
 		return file;
